@@ -3,7 +3,8 @@ CXX= g++
 CFLAGS=
 CXXFLAGS= -g
 LDFLAGS= -framework Security\
-	 -framework CoreFoundation
+	 -framework CoreFoundation\
+	 -lcrypto\
 
 CXX_PROG=signdata
 CC_PROG=
