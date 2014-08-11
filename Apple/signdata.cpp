@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
     CSSM_RETURN crtn;
 
     // Hardcode the data
-    unsigned char buffer[] = "Hello,World";
+    unsigned char buffer[] = "Dancing Wolves";
     data.Data = buffer;
     data.Length = 11;
 
@@ -90,6 +90,14 @@ int main(int argc, char ** argv)
     SHA1(data.Data, data.Length, sha1Buf);
     in.Data = sha1Buf;
     in.Length = sizeof(sha1Buf);
+
+    //unsigned char outBuffer[512];
+    //out.Data = outBuffer;
+    //out.Length = 512;
+
+    //Allocate the buffer from CSP
+    out.Data = NULL;
+    out.Length = 0;
 
     //Get the KeychianRef first
     SecKeychainRef keychainRef;
@@ -192,6 +200,6 @@ int main(int argc, char ** argv)
     }
 
 
-    CFRelease(keychainList);
+    //CFRelease(keychainList);
     return 0;
 }
