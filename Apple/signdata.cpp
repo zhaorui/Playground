@@ -192,6 +192,26 @@ int main(int argc, char ** argv)
         cout<<"CSSM_SignData failed"<<endl;
         cout<<"ErrCode: "<<hex<<crtn<<" "<<dec<<crtn<<endl;
         cssmPerror("SignData Error Message", crtn);
+
+        //Create cssmContextDecrypt context
+        CssmContext cssmContextDecrypt;
+        crtn = CSSM_CSP_CreateAsymmetricContext(csp, CSSM_ALGID_RSA, creds,
+                                    key, padding, &cssmContextDecrypt);
+        if (crtn)
+        {
+            cout<<"CSSM_CSP_CreateAsymmetricContext failed"<<endl;
+            cssmPerror("CSSM_CSP_CreatAsyContext failed", crtn);
+        }
+
+        //sign with function CSSM_DecryptData
+        CSSM_SIZE bytes=0;
+        CSSM_DATA remainder;
+        crtn = CSSM_DecryptData(cssmContextDecrypt, &in, 1, &out, 1, &bytes, &remainder);
+        if (crtn)
+        {
+            cssmPerror("CSSM_DecryptData failed", crtn);
+        }
+
     }
     else
     {
