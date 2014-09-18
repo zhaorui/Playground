@@ -21,5 +21,9 @@ main()
     GetHomeDir bill
 }
 
-main
+#main
+id
+sudo -s id
+#real exit
+
 
