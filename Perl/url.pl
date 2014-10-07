@@ -6,7 +6,8 @@ use URI::Split qw /uri_split/;
 
 #my $urn = 'smb://obama:password@WIN-BU53IJE38OH.bill.com/smbshare/SMBShareFolder/SMBSubFolder';
 #my $urn = 'nfs://obama:password@WIN-BU53IJE38OH.bill.com/smbshare/SMBShareFolder/SMBSubFolder';
-my $urn = 'afp://obama:password@WIN-BU53IJE38OH.bill.com/smbshare/SMBShareFolder/SMBSubFolder';
+#my $urn = 'afp://obama:password@WIN-BU53IJE38OH.bill.com/smbshare/SMBShareFolder/SMBSubFolder';
+my $urn = 'afp://WIN-BU53IJE38OH.bill.com/smbshare/SMBShareFolder/SMBSubFolder';
 
 my ($scheme, $auth, $path) = uri_split($urn);
 
@@ -17,7 +18,43 @@ foreach ($scheme, $auth, $path)
         print "$_\n";
     }
 }
+
+
+my $userinfo="";
+my $server="";
+if ($auth=~/@/)
+{
+    print "now auth: $auth\n";
+    #server = $auth =~ m/([^@]+)$/;
+    $auth =~ m/([^@]+)$/;
+    $server = $1;
+    $auth =~ m/(.*)\@$server$/;
+    $userinfo = $1;
+}
+else
+{
+    $server = $auth;
+}
+
+my $user, $password;
+if ( $userinfo eq "" )
+{
+    $user="";
+    $password="";
+}
+elsif ( $userinfo =~ /^(.*):/ )
+{
+    $user = $1;
+}
+
+
+#my ($userinfo, $server) =  $auth =~ m/(.*)([^@]+)$/;
+
+print "server: $server\n";
+print "userinfo: $userinfo\n";
+
 print "----- Split End -----\n";
+exit(0);
 
 $str1 = uri_escape("hello world");
 $str2 = uri_escape("sample[01]");
