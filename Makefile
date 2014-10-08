@@ -31,4 +31,4 @@ clean:
 	    (cd $$i && echo "make clean $$i" && $(MAKE) clean ) || exit 1; \
 	done
 
-.PHONY: subdir
+.PHONY: subdir clean all
