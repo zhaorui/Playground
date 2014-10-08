@@ -7,7 +7,7 @@ CXXFLAGS=
 LDFLAGS= 
 
 #Add the target binary here
-Progs=flock funcpointer random
+Progs=flock funcpointer random uname readlink
 
 all: $(Progs) subdir
 
@@ -24,6 +24,8 @@ subdir:
 flock.o: flock.c
 funcpointer.o: funcpointer.c
 random.o: random.c
+readlink.o: readlink.c
+uname.o: uname.c
 
 clean:
 	rm -rf *.o $(Progs)
