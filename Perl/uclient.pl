@@ -1,12 +1,15 @@
 #!/usr/bin/perl -w
 
-use POSIX qw/ setuid /;
+use POSIX qw/ setuid setgid /;
 use IO::Socket::UNIX;
 
+setgid(26);
 setuid(26);
 
 print "uid: $<\n";
 print "euid: $>\n";
+print "gid: $(\n";
+print "egid: $)\n";
 
 my $socket = IO::Socket::UNIX->new(
         Peer => "print/socket",
